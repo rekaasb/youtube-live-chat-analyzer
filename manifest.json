@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "name": "YouTube Live Chat Analyzer",
+  "version": "1.0.0",
+  "description": "Анализ чата YouTube в реальном времени: топ участников, статистика, экспорт CSV",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "*://*.youtube.com/*"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "YouTube Live Chat Analyzer"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    "dashboard.html",
+    "dashboard.js"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "youtube-live-chat-analyzer@firefox.addons",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  }
+}

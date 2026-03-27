@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            width: 420px;
+            padding: 15px;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f9f9f9;
+        }
+        h2 {
+            color: #ff0000;
+            margin-top: 0;
+            font-size: 18px;
+            border-bottom: 2px solid #ff0000;
+            padding-bottom: 8px;
+        }
+        .stats {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        .stat-label {
+            font-weight: bold;
+            color: #555;
+        }
+        .stat-value {
+            color: #ff0000;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .update-time {
+            font-size: 11px;
+            color: #999;
+            text-align: center;
+            margin-top: 5px;
+        }
+        button {
+            background: #ff0000;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #cc0000;
+        }
+        button.secondary {
+            background: #555;
+        }
+        button.secondary:hover {
+            background: #333;
+        }
+        button.dashboard {
+            background: #2196F3;
+        }
+        button.dashboard:hover {
+            background: #0b7dda;
+        }
+        .auto-update {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 10px 0;
+            font-size: 12px;
+        }
+        .user-list {
+            max-height: 250px;
+            overflow-y: auto;
+            background: white;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .user-item {
+            padding: 5px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+        }
+        .user-name {
+            font-size: 12px;
+            color: #333;
+        }
+        .user-count {
+            color: #ff0000;
+            font-weight: bold;
+        }
+        .last-messages {
+            background: white;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 11px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        .last-message {
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+            color: #666;
+        }
+        .msg-time {
+            color: #999;
+        }
+        .msg-author {
+            color: #ff0000;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 10px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <h2>📊 YouTube Live Chat Analyzer</h2>
+    
+    <div class="stats">
+        <div class="stat-item">
+            <span class="stat-label">💬 Сообщений:</span>
+            <span class="stat-value" id="totalCount">0</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">👥 Участников:</span>
+            <span class="stat-value" id="uniqueCount">0</span>
+        </div>
+        <div class="update-time" id="lastUpdate">Обновлено: --:--:--</div>
+    </div>
+    
+    <div class="auto-update">
+        <label>
+            <input type="checkbox" id="autoUpdate" checked> Автообновление (5 сек)
+        </label>
+    </div>
+    
+    <div style="text-align: center;">
+        <button id="refreshBtn">🔄 Обновить сейчас</button>
+        <button id="exportBtn" class="secondary">📥 Экспорт CSV</button>
+        <button id="resetBtn" class="secondary">🗑️ Сброс</button>
+    </div>
+    
+    <!-- 👇 НОВАЯ КНОПКА ДЛЯ DASHBOARD -->
+    <div style="text-align: center; margin-top: 5px;">
+        <button id="openDashboardBtn" class="dashboard">🪟 Открыть Dashboard (отдельное окно)</button>
+    </div>
+    
+    <h3 style="margin-bottom: 5px;">🏆 Топ участников</h3>
+    <div class="user-list" id="userList">
+        <div style="text-align: center; color: #999;">Загрузка...</div>
+    </div>
+    
+    <h3 style="margin-bottom: 5px;">📝 Последние сообщения</h3>
+    <div class="last-messages" id="lastMessages">
+        <div style="text-align: center; color: #999;">Нет сообщений</div>
+    </div>
+    
+    <div class="footer">
+        Собирает сообщения LIVE CHAT в реальном времени<br>
+        Автообновление: раз в 5 секунд
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>
